@@ -72,7 +72,7 @@ const Displaylectures: React.FC = () => {
                                     return (
                                         <div key={lecture._id} className='border p-2 rounded-md'>
                                             <li className="space-y-2 " key={lecture._id} >
-                                                <p className="text-white cursor-pointer" onClick={() => setCurrentVideo(idx)}>
+                                                <p className={`${currentVideo == idx ? 'text-green-400' : 'text-white'} cursor-pointer`} onClick={() => setCurrentVideo(idx)}>
                                                     <span>
                                                         {" "} Lecture {idx + 1} : {" "}
                                                     </span>

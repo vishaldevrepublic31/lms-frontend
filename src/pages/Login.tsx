@@ -65,7 +65,10 @@ const Login: React.FC = () => {
                         />
                     </div>
                     <div className="flex flex-col gap-1">
-                        <label htmlFor="password" className='font-semibold'>Password</label>
+                        <div className="flex justify-between">
+                            <label htmlFor="password" className='font-semibold'>Password</label>
+                            <span><Link to='/forgot-password' className="link text-accent">Forget password</Link> </span>
+                        </div>
                         <input
                             className="bg-transparent px-2 py-1 border"
                             type="password"

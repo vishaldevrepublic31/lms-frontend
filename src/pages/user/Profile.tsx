@@ -4,13 +4,11 @@ import HomeLayout from "../../layout/HomeLayout";
 import React from "react";
 import toast from "react-hot-toast";
 import { getUserData } from "../../redux/slices/AuthSlice";
-import { cancelCourseBundle } from '../../redux/slices/RazorpaySlice'
+import { cancelCourseBundle } from "../../redux/slices/RazorpaySlice";
 const Profile: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userData = useSelector((state: any) => state?.auth?.data);
-
-
 
     async function handleCancellation() {
         toast("Initiating cancellation");
@@ -18,7 +16,6 @@ const Profile: React.FC = () => {
         await dispatch(getUserData());
         toast.success("Cancellation completed!");
         navigate("/");
-
     }
     return (
         <HomeLayout>
@@ -32,36 +29,48 @@ const Profile: React.FC = () => {
                         {userData?.fullName}
                     </h3>
                     <div className="grid grid-cols-2">
-                        <p>Email: </p><p>{userData?.email}</p>
-                        <p>Role: </p><p>{userData?.role}</p>
-                        <p>Subscription: </p>
-                        <p>{userData?.subscription?.status === "active" ? "active" : "Inactive"}</p>
+                        <p>Email: </p>
+                        <p>{userData?.email}</p>
+                        <p>Role: </p>
+                        <p>{userData?.role}</p>
+                        {userData.role === "USER" && (
+                            <>
+                                {" "}
+                                <p>Subscription: </p>
+                                <p>
+                                    {userData?.subscription?.status === "active"
+                                        ? "active"
+                                        : "Inactive"}
+                                </p>
+                            </>
+                        )}
                     </div>
                     <div className="flex items-center justify-between gap-2">
                         <Link
                             to="/changepassword"
-                            className="w-1/2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm font-semibold py-2 cursor-pointer text-center">
+                            className="w-1/2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm font-semibold py-2 cursor-pointer text-center"
+                        >
                             <button>Change password</button>
-
                         </Link>
                         <Link
                             to="/user/editprofile"
-                            className="w-1/2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm font-semibold py-2 cursor-pointer text-center">
+                            className="w-1/2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm font-semibold py-2 cursor-pointer text-center"
+                        >
                             <button>Edit profile</button>
-
                         </Link>
                     </div>
                     {userData?.subscription?.status === "active" && (
                         <button
                             onClick={handleCancellation}
-                            className="w-full bg-red-600 hover:bg-red-500 transition-all ease-in-out duration-300 rounded-sm font-semibold py-2 cursor-pointer text-center">
+                            className="w-full bg-red-600 hover:bg-red-500 transition-all ease-in-out duration-300 rounded-sm font-semibold py-2 cursor-pointer text-center"
+                        >
                             Cancel Subscription
                         </button>
                     )}
                 </div>
             </div>
         </HomeLayout>
-    )
-}
+    );
+};
 
-export default Profile
+export default Profile;

@@ -19,6 +19,9 @@ import CheckoutFailure from './pages/payment/CheckoutFailure'
 import Displaylectures from './pages/Dashboard/Displaylectures'
 import Addlecture from './pages/Dashboard/Addlecture'
 import AdminDashboard from './pages/Dashboard/AdminDashboard'
+import ChangePassword from './pages/user/ChangePassword'
+import ForgotPassword from './pages/user/ForgotPassword'
+import ResetPassword from './pages/user/ResetPassword'
 const App = () => {
   return (
     <div>
@@ -29,6 +32,10 @@ const App = () => {
         <Route path='/courses' element={<CourseList />} />
         <Route path='/course/description' element={<CourseDescription />} />
         <Route path='/denied' element={<Denied />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
+
 
         <Route element={<RequireAuth allowedRoles={['ADMIN']} />}>
           <Route path='/course/create' element={<CreateCourse />} />
@@ -43,6 +50,8 @@ const App = () => {
           <Route path='/checkout/success' element={<CheckoutSuccess />} />
           <Route path='/checkout/fail' element={<CheckoutFailure />} />
           <Route path='/course/displaylectures' element={<Displaylectures />} />
+          <Route path='/changepassword' element={<ChangePassword />} />
+
         </Route>
 
 

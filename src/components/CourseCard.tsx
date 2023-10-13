@@ -3,7 +3,7 @@ import React from "react"
 interface CourseCardProps {
     data: any;
 }
-const CourseCard: React.FC<CourseCardProps> = ({ data }: any) => {
+const CourseCard: React.FC<CourseCardProps> = ({ data }) => {
     const navigate = useNavigate();
 
     return (

@@ -65,6 +65,54 @@ export const logout: any = createAsyncThunk("/auth/logout", async () => {
     }
 });
 
+export const changePassword: any = createAsyncThunk("/auth/changepassword", async (data) => {
+    try {
+        const res = axiosInstance.post("/user/change-password", data);
+        toast.promise(res, {
+            loading: "Wait! change password in progress...",
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to change password",
+        });
+        return (await res).data;
+    } catch (error: any) {
+        toast.error(error?.response?.data?.message);
+    }
+});
+
+export const forgotPassword: any = createAsyncThunk("/auth/forgotpassword", async (data) => {
+    try {
+        const res = axiosInstance.post("/user/forgot-password", data);
+        toast.promise(res, {
+            loading: "Wait! sent link your email address...",
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed",
+        });
+        return (await res).data;
+    } catch (error: any) {
+        toast.error(error?.response?.data?.message);
+    }
+});
+
+
+export const resetPassword: any = createAsyncThunk("/auth/resetpassword", async (data: any) => {
+    try {
+        const res = axiosInstance.post(`/user/reset-password/${data.resetToken}`, data);
+        toast.promise(res, {
+            loading: "Wait! sent link your email address...",
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed",
+        });
+        return (await res).data;
+    } catch (error: any) {
+        toast.error(error?.response?.data?.message);
+    }
+});
 export const updateProfile: any = createAsyncThunk("/user/update/profile", async (data) => {
     try {
         const res = axiosInstance.put(`user/update`, data);
