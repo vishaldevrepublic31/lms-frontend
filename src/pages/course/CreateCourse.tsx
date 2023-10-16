@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,12 +6,21 @@ import { createNewCourse } from "../../redux/slices/CourseSlice";
 import HomeLayout from "../../layout/HomeLayout";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import React from "react"
+
+interface ICreateCourse {
+    title: string
+    category: string
+    createdBy: string
+    description: string
+    thumbnail: any
+    previewImage: any
+}
 const CreateCourse: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
-    const [userInput, setUserInput] = useState<any>({
+    const [userInput, setUserInput] = useState<ICreateCourse>({
         title: "",
         category: "",
         createdBy: "",
@@ -36,7 +45,7 @@ const CreateCourse: React.FC = () => {
         }
     }
 
-    function handleUserInput(e: any) {
+    function handleUserInput(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const { name, value } = e.target;
         setUserInput({
             ...userInput,
@@ -44,7 +53,7 @@ const CreateCourse: React.FC = () => {
         })
     }
 
-    async function onFormSubmit(e: any) {
+    async function onFormSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setLoading(true)
 
@@ -53,7 +62,7 @@ const CreateCourse: React.FC = () => {
             return;
         }
 
-        const response = await dispatch(createNewCourse(userInput));
+        const response: any = await dispatch(createNewCourse(userInput));
         if (response?.payload?.success) {
             console.log("Hello");
             navigate("/courses");

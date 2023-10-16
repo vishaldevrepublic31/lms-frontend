@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { Dispatch, useState } from 'react'
 import HomeLayout from '../../layout/HomeLayout'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { changePassword } from '../../redux/slices/AuthSlice';
+import { AnyAction } from '@reduxjs/toolkit';
 
+interface IChangePassword {
+    oldPassword: string
+    newPassword: string
+}
 const ChangePassword: React.FC = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const [passwordData, setPasswordData] = useState({
+    const dispatch: Dispatch<AnyAction> = useDispatch()
+    const navigate: NavigateFunction = useNavigate()
+    const [passwordData, setPasswordData] = useState<IChangePassword>({
         oldPassword: '',
         newPassword: '',
     });
@@ -22,7 +27,7 @@ const ChangePassword: React.FC = () => {
     }
     const handleChangePassword = async (e: any) => {
         e.preventDefault();
-        const response = await dispatch(changePassword(passwordData))
+        const response: any = await dispatch(changePassword(passwordData))
         if (response?.payload?.success) {
             navigate("/user/profile");
             setPasswordData({

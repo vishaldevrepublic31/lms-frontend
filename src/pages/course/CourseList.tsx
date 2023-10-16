@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux"
 import HomeLayout from "../../layout/HomeLayout"
 import { getAllCourses } from "../../redux/slices/CourseSlice"
-import { useEffect } from "react"
+import { Dispatch, useEffect } from "react"
 import CourseCard from "../../components/CourseCard"
 import React from "react"
+import { AnyAction } from "@reduxjs/toolkit"
 const CourseList: React.FC = () => {
-    const dispatch = useDispatch()
+    const dispatch: Dispatch<AnyAction> = useDispatch()
     const { courseData } = useSelector((state: any) => state.courses)
 
-    function loadCourses() {
+    function loadCourses(): void {
         dispatch(getAllCourses())
     }
 

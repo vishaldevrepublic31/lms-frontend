@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
+import React, { Dispatch, useState } from 'react'
 import HomeLayout from '../../layout/HomeLayout'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { forgotPassword } from '../../redux/slices/AuthSlice';
+import { AnyAction } from '@reduxjs/toolkit';
 
 const ForgotPassword: React.FC = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const [email, setEmail] = useState('');
+    const dispatch: Dispatch<AnyAction> = useDispatch()
+    const navigate: NavigateFunction = useNavigate()
+    const [email, setEmail] = useState<string>('');
 
 
     const handleForgotPassword = async (e: any) => {
         e.preventDefault();
-        const response = await dispatch(forgotPassword({ email }))
+        const response: any = await dispatch(forgotPassword({ email }))
         if (response?.payload?.success) {
             navigate("/user/profile");
             setEmail('')

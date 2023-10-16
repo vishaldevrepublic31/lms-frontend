@@ -1,11 +1,12 @@
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { getRazorPayId, purchaseCourseBundle, verifyUserPayment } from "../../redux/slices/RazorpaySlice";
-import { useEffect } from "react";
+import { Dispatch, useEffect } from "react";
 import React from "react";
 import HomeLayout from "../../layout/HomeLayout";
 import { BiRupee } from 'react-icons/bi'
+import { AnyAction } from "@reduxjs/toolkit";
 
 declare global {
     interface Window {
@@ -14,10 +15,10 @@ declare global {
 }
 
 const Checkout: React.FC = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const razorpayKey = useSelector((state: any) => state?.razorpay?.key);
-    const subscription_id = useSelector((state: any) => state?.razorpay?.subscription_id);
+    const dispatch: Dispatch<AnyAction> = useDispatch();
+    const navigate: NavigateFunction = useNavigate();
+    const razorpayKey: any = useSelector((state: any) => state?.razorpay?.key);
+    const subscription_id: any = useSelector((state: any) => state?.razorpay?.subscription_id);
     const paymentDetails = {
         razorpay_payment_id: "",
         razorpay_subscription_id: "",
@@ -46,7 +47,7 @@ const Checkout: React.FC = () => {
 
                 toast.success("Payment successfull");
 
-                const res = await dispatch(verifyUserPayment(paymentDetails));
+                const res: any = await dispatch(verifyUserPayment(paymentDetails));
                 console.log(res);
                 res?.payload?.success ? navigate("/checkout/success") : navigate("/checkout/fail");
             }

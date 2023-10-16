@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 import HomeLayout from "../../layout/HomeLayout";
-import React from "react";
+import React, { Dispatch } from "react";
 import toast from "react-hot-toast";
 import { getUserData } from "../../redux/slices/AuthSlice";
 import { cancelCourseBundle } from "../../redux/slices/RazorpaySlice";
+import { AnyAction } from "@reduxjs/toolkit";
 const Profile: React.FC = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const dispatch: Dispatch<AnyAction> = useDispatch();
+    const navigate: NavigateFunction = useNavigate();
     const userData = useSelector((state: any) => state?.auth?.data);
 
     async function handleCancellation() {

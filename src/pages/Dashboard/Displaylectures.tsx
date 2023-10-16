@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 import HomeLayout from '../../layout/HomeLayout'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteCourseLecture, getCourseLectures } from '../../redux/slices/LectureSlice'
+import { AnyAction } from '@reduxjs/toolkit'
 const Displaylectures: React.FC = () => {
 
-    const navigate = useNavigate()
+    const navigate: NavigateFunction = useNavigate()
     const { state } = useLocation()
-    const dispatch = useDispatch()
+    const dispatch: Dispatch<AnyAction> = useDispatch()
     const { lectures } = useSelector((state: any) => state.lecture);
     const { role } = useSelector((state: any) => state.auth);
 
     const [currentVideo, setCurrentVideo] = useState(0);
-    async function onLectureDelete(courseId, lectureId) {
+    async function onLectureDelete(courseId: any, lectureId: any) {
         console.log(courseId, lectureId);
         await dispatch(deleteCourseLecture({ courseId: courseId, lectureId: lectureId }));
         await dispatch(getCourseLectures(courseId));

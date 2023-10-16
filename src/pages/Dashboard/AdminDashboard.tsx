@@ -45,7 +45,7 @@ const AdminDashboard: React.FC = () => {
 
     const uniqueInstructorCoursesCount = {};
 
-    myCourses.forEach((course) => {
+    myCourses.forEach((course: { createdBy: string; }) => {
         const instructor = course.createdBy.toLowerCase();
         if (uniqueInstructorCoursesCount[instructor]) {
             uniqueInstructorCoursesCount[instructor]++;
@@ -54,7 +54,7 @@ const AdminDashboard: React.FC = () => {
         }
     });
 
-    const handleFilter = (e) => {
+    const handleFilter = (e: any) => {
         const { name, value } = e.target;
         setFilters({
             ...filters,
@@ -62,14 +62,14 @@ const AdminDashboard: React.FC = () => {
         });
     };
 
-    const sortedCourses = myCourses
+    const sortedCourses: any = myCourses
         ?.filter((course: any) => {
-            const courseMatch =
+            const courseMatch: any =
                 course.title.toLowerCase().includes(filters.courseName.toLowerCase()) &&
                 course.createdBy.toLowerCase().includes(filters.instructor.toLowerCase());
             return courseMatch;
         })
-        .sort((courseA, courseB) => {
+        .sort((courseA: any, courseB: any) => {
             if (sortOrder === 'asc') {
                 return courseA.numberOfLectures - courseB.numberOfLectures;
             } else {
@@ -119,7 +119,7 @@ const AdminDashboard: React.FC = () => {
         ],
     };
 
-    async function onCourseDelete(id) {
+    async function onCourseDelete(id: any) {
         if (window.confirm('Are you sure you want to delete the course ? ')) {
             const res = await dispatch(deleteCourse(id));
 

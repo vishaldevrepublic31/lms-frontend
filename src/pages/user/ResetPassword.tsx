@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { Dispatch, useState } from 'react'
 import HomeLayout from '../../layout/HomeLayout'
 import { useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { NavigateFunction, useNavigate, useParams } from 'react-router-dom';
 import { resetPassword } from '../../redux/slices/AuthSlice';
+import { AnyAction } from '@reduxjs/toolkit';
 
 const ResetPassword: React.FC = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const dispatch: Dispatch<AnyAction> = useDispatch()
+    const navigate: NavigateFunction = useNavigate()
     const [password, setPassword] = useState('');
     const { resetToken } = useParams()
 
@@ -16,7 +17,7 @@ const ResetPassword: React.FC = () => {
             resetToken,
             password
         }
-        const response = await dispatch(resetPassword(data))
+        const response: any = await dispatch(resetPassword(data))
         if (response?.payload?.success) {
             navigate("/user/profile");
             setPassword('')

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React from "react"
+import { AiOutlineHeart } from "react-icons/ai";
 interface CourseCardProps {
     data: any;
 }

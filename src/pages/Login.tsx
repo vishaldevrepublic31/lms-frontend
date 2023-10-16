@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import HomeLayout from "../layout/HomeLayout";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/slices/AuthSlice";
 import React from "react";
+import { AnyAction } from "@reduxjs/toolkit";
+
+
 
 const Login: React.FC = () => {
-    const dispatch: any = useDispatch()
+    const dispatch: Dispatch<AnyAction> = useDispatch()
 
-    const navigate = useNavigate()
+    const navigate: NavigateFunction = useNavigate()
     const [isLoading, setIsLoading] = useState(false);
     const [loginData, setLogindata] = useState({
         email: '',
@@ -33,7 +36,7 @@ const Login: React.FC = () => {
             setIsLoading(false);
             return;
         }
-        const response = await dispatch(login(loginData));
+        const response: any = await dispatch(login(loginData));
         if (response?.payload?.success)
             navigate("/");
         setIsLoading(false)

@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 import { addCourseLecture } from '../../redux/slices/LectureSlice';
 import HomeLayout from '../../layout/HomeLayout';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { AnyAction } from '@reduxjs/toolkit';
 
 const Addlecture: React.FC = () => {
     const courseDetails = useLocation().state;
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const dispatch: Dispatch<AnyAction> = useDispatch();
+    const navigate: NavigateFunction = useNavigate();
 
     const [userInput, setUserInput] = useState({
         id: courseDetails?._id,
@@ -45,7 +46,7 @@ const Addlecture: React.FC = () => {
             toast.error("All fields are mandatory")
             return;
         }
-        const response = await dispatch(addCourseLecture(userInput));
+        const response: any = await dispatch(addCourseLecture(userInput));
         if (response?.payload?.success) {
             navigate(-1);
             setUserInput({

@@ -1,15 +1,16 @@
 import { getUserData, updateProfile } from "../../redux/slices/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Dispatch, useState } from "react";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import HomeLayout from "../../layout/HomeLayout";
 import { BsPersonCircle } from "react-icons/bs";
 import React from "react";
+import { AnyAction } from "@reduxjs/toolkit";
 
 const EditProfile: React.FC = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const dispatch: Dispatch<AnyAction> = useDispatch();
+    const navigate: NavigateFunction = useNavigate();
     const [data, setData] = useState<any>({
         previewImage: "",
         fullName: "",

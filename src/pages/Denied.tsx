@@ -1,8 +1,8 @@
 
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import React from "react"
 function Denied() {
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
     return (
         <main className="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
             <h1 className="text-9xl font-extrabold text-white tracking-widest">

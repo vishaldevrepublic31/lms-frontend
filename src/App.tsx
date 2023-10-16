@@ -22,6 +22,7 @@ import AdminDashboard from './pages/Dashboard/AdminDashboard'
 import ChangePassword from './pages/user/ChangePassword'
 import ForgotPassword from './pages/user/ForgotPassword'
 import ResetPassword from './pages/user/ResetPassword'
+import Contact from './pages/Contact'
 const App = () => {
   return (
     <div>
@@ -29,6 +30,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutUs />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='/courses' element={<CourseList />} />
         <Route path='/course/description' element={<CourseDescription />} />
         <Route path='/denied' element={<Denied />} />
